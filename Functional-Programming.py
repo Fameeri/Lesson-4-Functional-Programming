@@ -74,3 +74,89 @@ for data in weather_converted:
     print(f"  Celsius: {data['temp_celsius']}°C")
     print(f"  Fahrenheit: {data['temp_fahrenheit']:.1f}°F")
     print(f"  Kelvin: {data['temp_kelvin']:.1f}K")
+
+
+# Filter Function with Customer Data
+
+customers = [
+    {"name": "Alice Johnson", "total_spent": 1250, "orders": 8, "vip_member": True},
+    {"name": "Bob Smith", "total_spent": 750, "orders": 12, "vip_member": False},
+    {"name": "Carol Davis", "total_spent": 2100, "orders": 15, "vip_member": True},
+    {"name": "David Wilson", "total_spent": 450, "orders": 3, "vip_member": False},
+    {"name": "Emma Brown", "total_spent": 980, "orders": 7, "vip_member": False},
+    {"name": "Frank Miller", "total_spent": 1800, "orders": 20, "vip_member": True},
+]
+
+# TODO: Use filter() to find customers who qualify for premium promotion
+# Criteria: (total_spent >= 1000 AND orders >= 5) OR vip_member == True
+premium_customers = list(
+    filter(
+        lambda c: (c["total_spent"] >= 1000 and c["orders"] >= 5) or c["vip_member"],
+        customers,
+    )
+)  # YOUR CODE HERE, customers))
+
+# Test your result
+print("Premium Customers for Special Promotion:")
+for customer in premium_customers:
+    print(
+        f"  {customer['name']} - Spent: ${customer['total_spent']}, Orders: {customer['orders']}"
+    )
+
+# List Comprehensions with Sales Data
+
+sales_data = [
+    {"product": "Laptop", "q1": 150, "q2": 180, "q3": 160, "q4": 200},
+    {"product": "Mouse", "q1": 300, "q2": 280, "q3": 320, "q4": 350},
+    {"product": "Keyboard", "q1": 200, "q2": 190, "q3": 210, "q4": 230},
+    {"product": "Monitor", "q1": 80, "q2": 95, "q3": 85, "q4": 110},
+    {"product": "Headphones", "q1": 120, "q2": 140, "q3": 130, "q4": 160},
+]
+
+# TODO: Use list comprehension to create a new list with annual totals
+# Include product name and total_sales
+# [{'product': <product name>, 'total_sales': q1 + q2 + q3 + q4}]
+
+annual_sales = [
+    {
+        "product": p["product"],
+        "total_sales": p["q1"] + p["q2"] + p["q3"] + p["q4"],
+    }  # YOUR CODE HERE for product in sales_data]
+    for p in sales_data
+]
+
+# Test your result
+print("Annual Sales Totals:")
+for item in annual_sales:
+    print(f"  {item['product']}: {item['total_sales']} units")
+
+# Task 4b: Find High-Performing Products
+
+# TODO: Use list comprehension to find products with total sales > 600
+# Return just the product names
+high_performers = [  # YOUR CODE HERE for product in sales_data # YOUR CONDITION HERE]
+    p["product"] for p in sales_data if (p["q1"] + p["q2"] + p["q3"] + p["q4"]) > 600
+]
+
+# Test your result
+print("High-Performing Products (>600 units):")
+for product in high_performers:
+    print(f"  {product}")
+
+# Task 4c: Growth Analysis
+# TODO: Use list comprehension to calculate Q4 vs Q1 growth percentage
+# Formula: ((Q4 - Q1) / Q1) * 100
+# Include products that had positive growth
+growth_analysis = [  # YOUR CODE HERE for product in sales_data # YOUR CONDITION HERE]
+    {
+        "product": p["product"],
+        "growth_percentage": ((p["q4"] - p["q1"]) / p["q1"]) * 100,
+    }
+    for p in sales_data
+    if p["q4"] > p["q1"]
+]
+
+# Test your result
+print("Products with Positive Growth (Q4 vs Q1):")
+for item in growth_analysis:
+    print(f"  {item['product']}: {item['growth_percentage']:.1f}% growth")
